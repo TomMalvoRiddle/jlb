@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class CourierAgency {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double weight, stamps, deliveryCost, totalCost;
+        String location;
+
+        System.out.print("Enter the weight of the parcel in kg: ");
+        weight = scanner.nextDouble();
+
+        stamps = weight * 2.0; // each kg requires a stamp of $2
+        System.out.println("Number of stamps required: " + stamps);
+
+        System.out.print("Enter the delivery location (city/country): ");
+        location = scanner.next();
+
+        if (location.equalsIgnoreCase("city")) {
+            deliveryCost = 20.0;
+        } else {
+            deliveryCost = 40.0;
+        }
+
+        totalCost = stamps + deliveryCost;
+        System.out.println("Total cost of the parcel: $" + totalCost);
+    }
+}
