@@ -1,0 +1,44 @@
+import java.io.*;
+
+public class BinaryFileGrades {
+    public static void main(String[] args) {
+        double[] grades = new double[8];
+        try {
+            // Read grades from user input
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            for (int i = 0; i < grades.length; i++) {
+                System.out.print("Enter grade for student " + (i+1) + ": ");
+                grades[i] = Double.parseDouble(br.readLine());
+            }
+            
+            // Write grades to binary file
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream("grades.bin"));
+            for (int i = 0; i < grades.length; i++) {
+                dos.writeDouble(grades[i]);
+            }
+            dos.close();
+            
+            // Read grades from binary file and find highest and lowest grades
+            double highestGrade = Double.MIN_VALUE;
+            double lowestGrade = Double.MAX_VALUE;
+            DataInputStream dis = new DataInputStream(new FileInputStream("grades.bin"));
+            for (int i = 0; i < grades.length; i++) {
+                double grade = dis.readDouble();
+                if (grade > highestGrade) {
+                    highestGrade = grade;
+                }
+                if (grade < lowestGrade) {
+                    lowestGrade = grade;
+                }
+            }
+            dis.close();
+            
+            // Output highest and lowest grades
+            System.out.println("Highest grade: " + highestGrade);
+            System.out.println("Lowest grade: " + lowestGrade);
+            
+        } catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+}
