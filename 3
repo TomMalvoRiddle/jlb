@@ -1,0 +1,31 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BinarySearch {
+   public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+
+      // Take input for the list of elements
+      System.out.print("Enter the number of elements in the list: ");
+      int n = scanner.nextInt();
+      int[] elements = new int[n];
+      System.out.println("Enter the elements in sorted order:");
+      for (int i = 0; i < n; i++) {
+         elements[i] = scanner.nextInt();
+      }
+
+      // Take input for the element to search
+      System.out.print("Enter the element to search: ");
+      int key = scanner.nextInt();
+
+      // Perform binary search
+      int result = Arrays.binarySearch(elements, key);
+
+      // Print the result of binary search
+      if (result >= 0) {
+         System.out.println("Element found at index " + result);
+      } else {
+         System.out.println("Element not found in the list");
+      }
+   }
+}
