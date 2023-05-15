@@ -1,0 +1,39 @@
+import java.time.LocalDate;
+
+public class Journal {
+    private String authorName;
+    private String paperTitle;
+    private LocalDate submissionDate;
+
+    public Journal(String authorName, String paperTitle, LocalDate submissionDate) {
+        this.authorName = authorName;
+        this.paperTitle = paperTitle;
+        this.submissionDate = submissionDate;
+    }
+
+    public String getPaperTitle() {
+        String[] words = paperTitle.split(" ");
+        StringBuilder sb = new StringBuilder();
+
+        for (String word : words) {
+            sb.append(Character.toUpperCase(word.charAt(0)))
+              .append(word.substring(1))
+              .append(" ");
+        }
+
+        return sb.toString().trim();
+    }
+
+    // Getters and setters for authorName and submissionDate omitted for brevity
+}
+public class Main {
+    public static void main(String[] args) {
+        LocalDate submissionDate = LocalDate.of(2021, 5, 15);
+
+        Journal journal = new Journal("John Smith", "a paper on the importance of Java programming", submissionDate);
+
+        System.out.println("Author name: " + journal.getAuthorName());
+        System.out.println("Paper title: " + journal.getPaperTitle());
+        System.out.println("Submission date: " + journal.getSubmissionDate());
+    }
+}
