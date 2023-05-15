@@ -1,0 +1,50 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+import java.time.Period;
+import java.time.format.DateTimeParseException;
+
+public class CalAge {
+    private LocalDate birthDate;
+    private LocalDate currentDate;
+
+    public CalAge(String birthDateStr, String currentDateStr) throws DateTimeParseException {
+        birthDate = LocalDate.parse(birthDateStr);
+        currentDate = LocalDate.parse(currentDateStr);
+    }
+
+    public boolean isValidBirthDate() {
+        // A birth date is considered valid if it is not in the future
+        return birthDate.isBefore(currentDate) || birthDate.equals(currentDate);
+    }
+
+    public int getAge() {
+        // Calculate the age using the birth date and current date
+        return Period.between(birthDate, currentDate).getYears();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your birth date in yyyy-mm-dd format: ");
+        String birthDateStr = scanner.nextLine();
+
+        System.out.print("Enter the current date in yyyy-mm-dd format: ");
+        String currentDateStr = scanner.nextLine();
+
+        try {
+            CalAge calAge = new CalAge(birthDateStr, currentDateStr);
+
+            if (!calAge.isValidBirthDate()) {
+                System.out.println("Invalid birth date entered");
+                return;
+            }
+
+            int age = calAge.getAge();
+            System.out.println("Your age is " + age + " years");
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format entered");
+        }
+    }
+}
