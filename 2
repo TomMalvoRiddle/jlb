@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class RaceQualification {
+   public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+
+      // Initialize variables
+      double totalSpeed = 0.0;
+      double averageSpeed = 0.0;
+      int numQualifiers = 0;
+
+      // Take input for each racer's speed
+      System.out.println("Enter the speed of each racer:");
+      double[] speeds = new double[5];
+      for (int i = 0; i < 5; i++) {
+         speeds[i] = scanner.nextDouble();
+         totalSpeed += speeds[i];
+      }
+
+      // Calculate the average speed of all racers
+      averageSpeed = totalSpeed / 5;
+
+      // Check each racer's speed and print the speed of qualifying racers
+      System.out.println("The speed of qualifying racers is:");
+      for (int i = 0; i < 5; i++) {
+         if (speeds[i] > averageSpeed) {
+            System.out.println(speeds[i]);
+            numQualifiers++;
+         }
+      }
+
+      // Print the total number of qualifying racers
+      System.out.println("Total number of qualifying racers: " + numQualifiers);
+   }
+}
