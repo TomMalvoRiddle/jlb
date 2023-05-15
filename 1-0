@@ -1,0 +1,27 @@
+public class Buzzer extends Thread implements MonitorTime {
+    private int delay;
+    private int repeat;
+
+    public void setBuzzerTime(int delay, int repeat) {
+        this.delay = delay;
+        this.repeat = repeat;
+    }
+
+    public void blowBuzzer() {
+        for (int i = 0; i < repeat; i++) {
+            System.out.println("Buzz!");
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                System.out.println("Buzzer interrupted");
+            }
+        }
+    }
+}
+public static void main(String[] args) {
+    Buzzer buzzer = new Buzzer();
+    buzzer.setBuzzerTime(1000, 5); // buzzer will repeat 5 times with a 1-second delay between each repetition
+    buzzer.start(); // start the buzzer thread
+    // do other things while the buzzer is running
+    buzzer.interrupt(); // stop the buzzer thread
+}
