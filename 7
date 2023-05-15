@@ -1,0 +1,51 @@
+public class BookStore {
+    private static int totalBooksSold = 0;
+
+    private String category;
+    private String author;
+    private String title;
+    private String publisher;
+    private double sellingPrice;
+    private int quantity;
+
+    public BookStore(String category, String author, String title, String publisher, double sellingPrice, int quantity) {
+        this.category = category;
+        this.author = author;
+        this.title = title;
+        this.publisher = publisher;
+        this.sellingPrice = sellingPrice;
+        this.quantity = quantity;
+    }
+
+    public void sellBook(int numBooksSold) {
+        if (numBooksSold > quantity) {
+            System.out.println("Error: Not enough books in stock.");
+            return;
+        }
+
+        quantity -= numBooksSold;
+        totalBooksSold += numBooksSold;
+
+        System.out.println("Successfully sold " + numBooksSold + " books.");
+    }
+
+    public static void trackSalesStatus() {
+        System.out.println("Total number of books sold: " + totalBooksSold);
+    }
+
+    // Getters and setters for all instance variables omitted for brevity
+}
+public class Main {
+    public static void main(String[] args) {
+        BookStore book1 = new BookStore("Kids", "Dr. Seuss", "Green Eggs and Ham", "Random House", 5.99, 50);
+        BookStore book2 = new BookStore("Engineering", "Andrew Ng", "Machine Learning Yearning", "Independently published", 19.99, 100);
+        BookStore book3 = new BookStore("Story", "J.K. Rowling", "Harry Potter and the Sorcerer's Stone", "Scholastic", 7.99, 75);
+
+        book1.sellBook(10);
+        book2.sellBook(50);
+        book3.sellBook(100); // should generate an error message
+        book3.sellBook(50); // should sell successfully
+
+        BookStore.trackSalesStatus(); // should print "Total number of books sold: 110"
+    }
+}
